@@ -1,14 +1,20 @@
 <section>
     <div class="form-group" style="width:60%;margin: auto">
-        <form #validationForm="ngForm" (ngSubmit) = "sendButtonClicked(validationForm.value);validationForm.reset();">
-            <input type="text" class="form-control" ngModel placeholder="Enter desired schema name for saving"
-            name="schemaName">
+        <form #validationForm="ngForm" (ngSubmit) = "sendButtonClicked(validationForm.value);">
+            <input type="text" class="form-control" ngModel placeholder="Enter desired schema name for saving" name = "schemaName">
             <br>
             <textarea class="form-control" ngModel placeholder="Enter JSON string" name="jsonObject"></textarea>
             <br>
-            <input type="file" ngModel class="form-control" name="schemaFile">
+            <input type="file" ngModel class="form-control" name="schemaFile" (change) = "onFileSelected($event)">
             <br>
-            <button class="btn" type="submit">Send</button>
+            <div style="display: flex;justify-content: space-between;">
+                <button class="btn" type="submit">Send</button> 
+                <button class="btn" type="reset" (click) = "validationForm.reset();clearFile();message=''">Clear form</button>
+            </div>
         </form>
+        <br>
+        <p>
+            {{message}}
+        </p>
     </div>
 </section>
